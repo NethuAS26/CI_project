@@ -83,7 +83,7 @@ See [frontend/GITHUB_SETUP.md](frontend/GITHUB_SETUP.md) for deployment instruct
 
 ### Algorithm
 - **Primary Model**: Logistic Regression
-- **Accuracy**: ~97% on test data
+- **Accuracy**: ~97% accuracy on test data
 - **Features**: 9 engineered features from 7 behavioral patterns
 
 ### Behavioral Patterns Analyzed
@@ -305,4 +305,4 @@ This project is for educational and research purposes. Please refer to the indiv
 
 **Built with ❤️ for AI-powered personality analysis**
 
-**Happy Coding! 🚀✨** 
+**Happy Coding! 🚀✨**
