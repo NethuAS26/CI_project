@@ -21,6 +21,14 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+            25% { background: linear-gradient(135deg, #764ba2 0%, #f093fb 50%, #667eea 100%); }
+            50% { background: linear-gradient(135deg, #f093fb 0%, #667eea 50%, #764ba2 100%); }
+            75% { background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #764ba2 100%); }
         }
 
         body::before {
@@ -30,25 +38,61 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
             pointer-events: none;
             z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
-            padding: 50px;
-            max-width: 650px;
+                0 35px 70px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            padding: 60px;
+            max-width: 700px;
             width: 100%;
             text-align: center;
             position: relative;
             z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: containerFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
+            border-radius: 32px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         .header {
@@ -57,14 +101,22 @@
 
         .header h1 {
             color: #333;
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 800;
+            font-weight: 900;
             letter-spacing: -0.02em;
+            animation: gradientText 4s ease-in-out infinite;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .header p {
@@ -76,13 +128,16 @@
         }
 
         .info-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            padding: 20px;
-            margin-bottom: 35px;
-            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(240, 147, 251, 0.15));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.1);
+            animation: infoBoxGlow 3s ease-in-out infinite;
         }
 
         .info-box::before {
@@ -91,8 +146,20 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+            background-size: 200% 100%;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes infoBoxGlow {
+            0%, 100% { box-shadow: 0 8px 32px rgba(102, 126, 234, 0.1); }
+            50% { box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2); }
         }
 
         .info-box h4 {
@@ -130,42 +197,52 @@
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 16px 20px;
+            padding: 18px 24px;
             border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: white;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.9);
             font-weight: 500;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
+            box-shadow: 
+                0 0 0 4px rgba(102, 126, 234, 0.15),
+                0 8px 32px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 1);
         }
 
         .form-group input:hover,
         .form-group select:hover {
             border-color: #764ba2;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
         }
 
         .submit-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
+            background-size: 300% 300%;
             color: white;
             border: none;
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            padding: 22px 50px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
-            margin-top: 30px;
+            margin-top: 40px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            animation: gradientShift 4s ease-in-out infinite;
         }
 
         .submit-btn::before {
@@ -175,8 +252,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
         }
 
         .submit-btn:hover::before {
@@ -184,12 +261,13 @@
         }
 
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.5);
+            background-position: 100% 50%;
         }
 
         .submit-btn:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(0.98);
         }
 
         .submit-btn:disabled {
@@ -231,13 +309,14 @@
         }
 
         .result {
-            margin-top: 40px;
-            padding: 30px;
-            border-radius: 20px;
+            margin-top: 50px;
+            padding: 40px;
+            border-radius: 25px;
             display: none;
-            animation: slideInUp 0.6s ease;
+            animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
         .result::before {
@@ -247,18 +326,30 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
             pointer-events: none;
         }
 
         .result.extrovert {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%);
             color: white;
+            animation: extrovertGlow 3s ease-in-out infinite;
         }
 
         .result.introvert {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #f093fb 100%);
             color: white;
+            animation: introvertGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes extrovertGlow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(79, 172, 254, 0.3); }
+            50% { box-shadow: 0 20px 60px rgba(79, 172, 254, 0.5); }
+        }
+
+        @keyframes introvertGlow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(250, 112, 154, 0.3); }
+            50% { box-shadow: 0 20px 60px rgba(250, 112, 154, 0.5); }
         }
 
         .result h3 {
@@ -338,7 +429,23 @@
             content: '🧠';
             display: inline-block;
             animation: pulse 2s ease-in-out infinite;
-            margin-right: 10px;
+            margin-right: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Add sparkle effect to form icons */
+        .form-group label::before {
+            content: attr(data-icon);
+            display: inline-block;
+            margin-right: 8px;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1.05) rotate(-3deg); }
+            75% { transform: scale(1.1) rotate(3deg); }
         }
 
         /* Responsive design */
@@ -425,12 +532,12 @@
 
         <form id="personalityForm">
             <div class="form-group">
-                <label for="timeAlone">⏰ Time Spent Alone (hours per day)</label>
+                <label for="timeAlone" data-icon="⏰">Time Spent Alone (hours per day)</label>
                 <input type="number" id="timeAlone" name="timeAlone" min="0" max="24" step="0.5" required>
             </div>
 
             <div class="form-group">
-                <label for="stageFear">🎭 Stage Fear (public speaking anxiety)</label>
+                <label for="stageFear" data-icon="🎭">Stage Fear (public speaking anxiety)</label>
                 <select id="stageFear" name="stageFear" required>
                     <option value="">Select your answer</option>
                     <option value="Yes">Yes, I experience stage fear</option>
@@ -439,17 +546,17 @@
             </div>
 
             <div class="form-group">
-                <label for="socialEvents">🎉 Social Event Attendance (events per month)</label>
+                <label for="socialEvents" data-icon="🎉">Social Event Attendance (events per month)</label>
                 <input type="number" id="socialEvents" name="socialEvents" min="0" max="50" required>
             </div>
 
             <div class="form-group">
-                <label for="goingOutside">🏠 Going Outside (times per week)</label>
+                <label for="goingOutside" data-icon="🏠">Going Outside (times per week)</label>
                 <input type="number" id="goingOutside" name="goingOutside" min="0" max="50" required>
             </div>
 
             <div class="form-group">
-                <label for="drainedAfterSocializing">😴 Drained After Socializing</label>
+                <label for="drainedAfterSocializing" data-icon="😴">Drained After Socializing</label>
                 <select id="drainedAfterSocializing" name="drainedAfterSocializing" required>
                     <option value="">Select your answer</option>
                     <option value="Yes">Yes, I feel drained after socializing</option>
@@ -458,12 +565,12 @@
             </div>
 
             <div class="form-group">
-                <label for="friendsCircle">👥 Friends Circle Size (number of close friends)</label>
+                <label for="friendsCircle" data-icon="👥">Friends Circle Size (number of close friends)</label>
                 <input type="number" id="friendsCircle" name="friendsCircle" min="0" max="100" required>
             </div>
 
             <div class="form-group">
-                <label for="postFrequency">📱 Post Frequency (social media posts per week)</label>
+                <label for="postFrequency" data-icon="📱">Post Frequency (social media posts per week)</label>
                 <input type="number" id="postFrequency" name="postFrequency" min="0" max="100" required>
             </div>
 
