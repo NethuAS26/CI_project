@@ -307,13 +307,22 @@
             color: #667eea;
         }
 
-        /* Enhanced icon styling */
-        .header h1::before {
-            content: '🧠';
+
+
+        /* Logo styling */
+        .logo {
             display: inline-block;
             margin-right: 15px;
-            font-size: 1.2em;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            font-size: 2.5em;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(2deg); }
+            50% { transform: translateY(-2px) rotate(-1deg); }
+            75% { transform: translateY(-4px) rotate(1deg); }
         }
 
         .form-group label::before {
@@ -363,7 +372,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Personality Predictor</h1>
+            <h1><span class="logo">🧠</span>Personality Predictor</h1>
             <p>AI-powered analysis to determine if you're an Extrovert or Introvert based on your behavioral patterns</p>
         </div>
 
